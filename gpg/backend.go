@@ -28,6 +28,7 @@ func Backend() *backend {
 			pathExportKeys(&b),
 			pathSign(&b),
 			pathVerify(&b),
+			pathEncrypt(&b),
 			pathDecrypt(&b),
 			pathShowSessionKey(&b),
 		},
