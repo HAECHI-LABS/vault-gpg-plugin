@@ -66,7 +66,7 @@ DEV_PLATFORM="./pkg/${DEV_OSARCH}"
 for F in $(find ${DEV_PLATFORM} -mindepth 1 -maxdepth 1 -type f); do
     cp ${F} bin/
     cp ${F} ${MAIN_GOPATH}/bin/
-    sha256sum ${F} > ./bin/${DEV_OSARCH}.sha256sum
+    shasum -a 256 ${F} | cut -d " " -f1 > ./bin/${TOOL}.shasum
 done
 
 if [ "${VAULT_DEV_BUILD}x" = "x" ]; then
@@ -78,7 +78,7 @@ if [ "${VAULT_DEV_BUILD}x" = "x" ]; then
 
         pushd $PLATFORM >/dev/null 2>&1
         zip ../${OSARCH}.zip ./*
-        sha256sum -- * > ${OSARCH}.sha256sum
+        shasum -a 256 -- * | cut -d " " -f1 > ${OSARCH}.shasum
         popd >/dev/null 2>&1
     done
 fi

@@ -44,7 +44,4 @@ fmtcheck:
 fmt:
 	gofmt -w $(GOFMT_FILES)
 
-sha256sum:
-	@sh -c "'$(CURDIR)/scripts/sha256sum.sh'"
-
 .PHONY: bin default generate test vet bootstrap fmt fmtcheck
