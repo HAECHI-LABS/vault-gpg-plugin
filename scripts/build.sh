@@ -78,7 +78,7 @@ if [ "${VAULT_DEV_BUILD}x" = "x" ]; then
 
         pushd $PLATFORM >/dev/null 2>&1
         zip ../${OSARCH}.zip ./*
-        shasum -a 256 -- * | cut -d " " -f1 > ${OSARCH}.shasum
+        shasum -a 256 -- * | cut -d " " -f1 > ${TOOL}.shasum
         popd >/dev/null 2>&1
     done
 fi
