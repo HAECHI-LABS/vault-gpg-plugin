@@ -24,3 +24,33 @@ All archives available from the [release tab on GitHub](https://github.com/LeSui
 a GPG signature made with the GPG key [`FFCB D29F 3AFE D453 AE4B 9E32 1D40 FBA2 9EB3 9616`](https://sks-keyservers.net/pks/lookup?op=get&search=0xFFCBD29F3AFED453AE4B9E321D40FBA29EB39616).
 
 Once mounted in Vault, this plugin exposes [this HTTP API](docs/http-api.md).
+
+## How to use the Makefile
+#### To install modules
+```
+$ make bootstrap
+```
+If you see the below response, you can check [this issue](https://github.com/hashicorp/vault/issues/1288)
+```
+/scripts/build.sh: line 52: gox: command not found
+```
+
+#### To build for development
+```
+$ make dev
+```
+
+#### To build all binary files
+```
+$ make bin
+```
+
+#### To check go format
+```
+$ make fmtcheck
+```
+
+#### To format go files
+```
+$ make fmt
+```

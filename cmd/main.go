@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/LeSuisse/vault-gpg-plugin/gpg"
+	"github.com/HAECHI-LABS/vault-gpg-plugin/gpg"
 	"github.com/hashicorp/vault/api"
 	"github.com/hashicorp/vault/sdk/plugin"
 )
