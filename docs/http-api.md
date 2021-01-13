@@ -8,6 +8,7 @@ Since it is possible to mount secret backends at any location, please update you
 * [List Keys](#list-keys)
 * [Delete Key](#delete-key)
 * [Export Key](#export-key)
+* [Encrypt Data](#encrypt-data)
 * [Decrypt Data](#decrypt-data)
 * [Sign Data](#sign-data)
 * [Verify Signed Data](#verify-signed-data)
@@ -299,6 +300,58 @@ $ curl \
 {
   "data": {
     "valid": true
+  }
+}
+```
+
+## Encrypt Data
+
+This endpoint encrypts the provided plaintext using the recipient's key and the named GPG key.
+
+| Method   | Path                         | Produces               |
+| :------- | :--------------------------- | :--------------------- |
+| `POST`   | `/gpg/encrypt/:name`         | `200 application/json` |
+
+### Parameters
+
+- `name` `(string: <required>)` – Specifies the name of the key to be signed. This is specified as part of the URL.
+
+- `format` `(string: "base64")` – Specifies the encoding format the ciphertext uses. Valid encoding format are:
+
+    - `base64`
+    - `ascii-armor`
+
+- `plaintext` `(string: <required>)` – Specifies the plaintext to encrypt.
+
+- `recipient_key` `(string: <required>)` – Specifies the GPG key ASCII-armored of the recipient of the ciphertext.
+
+
+### Sample Payload
+
+```json
+{
+  "format": "ascii-armor",
+  "plaintext": "QWxwYWNhcwo=",
+  "recipient_key": "-----BEGIN PGP PUBLIC KEY BLOCK-----\n\nxsFNBF/9VgcBEACwprI516ZHbQerXamWY/zR+ojEhTRqFHvT8NhhGiSw6Ef+ofNk\n...\nuchbOAyZ8H1aVZ+TCrISNQ==\n=Zgf+\n-----END PGP PUBLIC KEY BLOCK-----"
+}
+```
+
+### Sample Request
+
+```
+$ curl \
+    --header "X-Vault-Token: ..." \
+    --request POST \
+    --data @payload.json \
+    https://vault.example.com/v1/gpg/encrypt/my-key
+```
+
+### Sample Response
+
+```json
+{
+  "data": {
+    "ciphertext": "-----BEGIN PGP MESSAGE-----\n\nhQEMA923ECy\/uCBhAQf8DLagsnoLuM4AyKiTyvZ7uSQTkmOkwXwn1WWsxoKJkzdI\n...\ne8iwFg==\n=+yfj\n-----END PGP MESSAGE-----"
   }
 }
 ```
